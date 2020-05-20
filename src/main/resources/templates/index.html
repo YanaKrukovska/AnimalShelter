@@ -18,24 +18,57 @@
     <table class="table">
         <thead class="thead-light">
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">User</th>
-            <th scope="col">email</th>
-            <th scope="col">Action</th>
+            <th scope="col">Name</th>
+            <th scope="col">Breed</th>
+            <th scope="col">Age</th>
+            <th scope="col">Gender</th>
+            <th scope="col">Arrival date</th>
         </tr>
         </thead>
         <tbody>
 
-        <tr th:each="user : ${users}">
-            <td><span th:text="${user.name}"> Title </span></td>
-            <td><span th:text="${user.email}"> Author </span></td>
+        <tr th:each="animal : ${animals}">
+            <form th:action="@{/sendRequest}" th:object="${request}" method="post">
+                <td><span th:text="${animal.name}"></span></td>
+                <td><span th:text="${animal.breed}"></span></td>
+                <td><span th:text="${animal.age}"></span></td>
+                <td><span th:text="${animal.gender}"></span></td>
+                <td><span th:text="${animal.arrivalDate}"></span></td>
+                <td><input type="hidden" th:value="${animal.id}" name="animalId"/>
+                    <button type="submit" class="addbutton" name="add" value="add">Request adoption</button>
+                </td>
+            </form>
+
+
+
         </tr>
         </tbody>
 
 
     </table>
 </div>
+<div>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Animal name</th>
+            <th scope="col">User</th>
+            <th scope="col">Date</th>
+        </tr>
+        </thead>
+        <tbody>
 
+        <tr th:each="request : ${requests}">
+            <td><span th:text="${request.id}"></span></td>
+            <td><span th:text="${request.animal.name}"></span></td>
+            <td><span th:text="${request.user.name}"></span></td>
+            <td><span th:text="${request.date}"></span></td>
+        </tr>
+        </tbody>
+
+
+    </table>
 </div>
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
