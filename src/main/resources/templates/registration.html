@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Registration</title>
+</head>
+
+<body>
+<form th:action="@{/registered}" th:object="${user}" method="post">
+
+    <div class="form-group">
+        <label for="exampleUsername">Username</label>
+        <input type="text" class="form-control" id="exampleUsername" placeholder="Username" th:value="${username}" name="username">
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" placeholder="Email" th:value="${email}" name="email">
+    </div>
+    <div class="form-group">
+        <label for="examplePassword1">Password</label>
+        <input type="password" class="form-control" id="examplePassword1" placeholder="Password">
+    </div>
+    <div class="form-group">
+        <label for="passwordComfirm">Password comfirm</label>
+        <input type="password" class="form-control" id="passwordComfirm" placeholder="Password">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</body>
+</html>
