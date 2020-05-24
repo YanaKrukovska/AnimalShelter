@@ -1,12 +1,16 @@
 package ua.edu.ukma.distedu.animalshelter.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.Request;
+import ua.edu.ukma.distedu.animalshelter.persistence.model.User;
 import ua.edu.ukma.distedu.animalshelter.service.AnimalService;
 import ua.edu.ukma.distedu.animalshelter.service.RequestService;
 import ua.edu.ukma.distedu.animalshelter.service.UserService;
@@ -34,10 +38,12 @@ public class ApplicationController {
     }
 
     @PostMapping("/sendRequest")
-    public String sendRequest(Model model, @RequestParam Long animalId) {
+    public String sendRequest(Model model, @RequestParam Long animalId, @AuthenticationPrincipal UserDetails currentUser) {
+        User user = userService.findUserByUsername(currentUser.getUsername());
+        model.addAttribute("currentStudent", user);
         model.addAttribute("animals", animalService.getAllAnimals());
         model.addAttribute("requests", requestService.getAllRequests());
-        requestService.addRequest(new Request(userService.findUserById(2), animalService.findAnimalById(animalId), new Date()));
+        requestService.addRequest(new Request(user, animalService.findAnimalById(animalId), new Date()));
         return "redirect:/";
     }
 
@@ -46,6 +52,5 @@ public class ApplicationController {
         model.addAttribute("users", userService.getAllUsers());
         return "users";
     }
-
 
 }

@@ -62,7 +62,7 @@
         <tr th:each="request : ${requests}">
             <td><span th:text="${request.id}"></span></td>
             <td><span th:text="${request.animal.name}"></span></td>
-            <td><span th:text="${request.user.name}"></span></td>
+            <td><span th:text="${request.user.username}"></span></td>
             <td><span th:text="${request.date}"></span></td>
         </tr>
         </tbody>
