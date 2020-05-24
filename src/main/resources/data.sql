@@ -1,7 +1,7 @@
 INSERT INTO users (id,username, email, PASSWORD) VALUES
-  (1, 'Greta Thunberg', 'greta.thunberg@gmail.com', 'greta'),
-  (2, 'Valtteri Bottas', 'valera@f1.com', 'bottas'),
-  (3, 'Oleg Vynnyk', 'olegvynnyk@gmail.com', 'olegvynnyk');
+  (1, 'GretaThunberg', 'greta.thunberg@gmail.com', 'greta'),
+  (2, 'ValtteriBottas', 'valera@f1.com', 'bottas'),
+  (3, 'OlegVynnyk', 'olegvynnyk@gmail.com', 'olegvynnyk');
 
 INSERT INTO animals (id , name, breed, gender, age, arrival_date) VALUES
   (1, 'Rita', 'cat', 'female', 14, '2005-09-12'),

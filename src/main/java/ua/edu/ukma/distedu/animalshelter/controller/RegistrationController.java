@@ -28,9 +28,9 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String addUser(@ModelAttribute User user) {
 
-//        if (bindingResult.hasErrors()) {
-//            return "registration";
-//        }
+/*        if (bindingResult.hasErrors()) {
+            return "registration";
+        }*/
       /*  if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
             model.addAttribute("passwordError", "Пароли не совпадают");
             return "registration";
@@ -41,6 +41,26 @@ public class RegistrationController {
             return "registration";
         }
 
+        return "redirect:/login";
+    }
+
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new User());
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute User user) {
+
+        if (userService.findUserByUsername(user.getUsername()) == null) {
+            return "login";
+        }
+        if (!userService.findUserByUsername(user.getUsername()).getPassword().equals(user.getPassword())) {
+            return "login";
+        }
         return "redirect:/";
     }
+
+
 }
