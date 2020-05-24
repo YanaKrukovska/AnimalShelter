@@ -23,6 +23,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+
         httpSecurity
                 .authorizeRequests()
                 .antMatchers("/registration").not().fullyAuthenticated()
@@ -33,6 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/console/**").permitAll()
                 .antMatchers("/register").permitAll()
                 .antMatchers("/confirm").permitAll()
+                .antMatchers("/css/**",
+                        "/js/**",
+                        "/img/**",
+                        "/webjars/**",
+                        "/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
