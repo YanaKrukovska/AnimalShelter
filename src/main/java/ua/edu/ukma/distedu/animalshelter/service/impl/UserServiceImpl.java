@@ -10,6 +10,7 @@ import ua.edu.ukma.distedu.animalshelter.persistence.model.Role;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.User;
 import ua.edu.ukma.distedu.animalshelter.persistence.repository.RoleRepository;
 import ua.edu.ukma.distedu.animalshelter.persistence.repository.UserRepository;
+import ua.edu.ukma.distedu.animalshelter.service.PasswordService;
 import ua.edu.ukma.distedu.animalshelter.service.UserService;
 
 import javax.persistence.EntityManager;
@@ -21,20 +22,14 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
-    @PersistenceContext
-    private EntityManager em;
-
-    private final
-    RoleRepository roleRepository;
-
-    private final
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final RoleRepository roleRepository;
+    private final PasswordService passwordService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordService passwordService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.passwordService = passwordService;
     }
 
     @Override
@@ -55,7 +50,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordService.encodePassword(user.getPassword()));
         userRepository.save(user);
         return true;
     }
@@ -94,11 +89,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             return true;
         }
         return false;
-    }
-
-    public List<User> usergtList(Long idMin) {
-        return em.createQuery("SELECT u FROM users u WHERE u.id > :paramId", User.class)
-                .setParameter("paramId", idMin).getResultList();
     }
 
 }
