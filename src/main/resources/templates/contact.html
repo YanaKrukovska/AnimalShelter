@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New Life Animal Adoption Service</title>
+    <link href="../static/css/contact.css" rel="stylesheet"/>
+    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>
+<body>
+
+<!-- Navigation -->
+<div th:replace="navbar.html :: navigation"></div>
+
+<main>
+    <div class="container" style="margin-top: 20px;">
+        <div class="row-fluid">
+            <div class="span8">
+                <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.co.uk/maps?f=q&source=s_q&hl=en&geocode=&q=15+Springfield+Way,+Hythe,+CT21+5SH&aq=t&sll=52.8382,-2.327815&sspn=8.047465,13.666992&ie=UTF8&hq=&hnear=15+Springfield+Way,+Hythe+CT21+5SH,+United+Kingdom&t=m&z=14&ll=51.077429,1.121722&output=embed"></iframe>
+            </div>
+
+            <div class="span4">
+                <h2>Contact information</h2>
+                <address>
+                    <strong>Hythe Window Cleaning</strong><br>
+                    15 Springfield Way<br>
+                    Hythe<br>
+                    Kent<br>
+                    United Kingdon<br>
+                    CT21 5SH<br>
+                    <abbr title="Phone">P:</abbr> +44 066 456 89 41
+                </address>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- Footer -->
+<footer class="page-footer font-small  fixed-bottom" style="text-align: center; background-color: #e3f2fd;" >
+    <div class="footer-copyright">© 2020 Copyright:
+        <a class="developers"> Krukovska Yana and Synelnyk Mariia</a>
+    </div>
+</footer>
+<!-- Footer -->
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

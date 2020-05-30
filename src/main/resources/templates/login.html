@@ -6,25 +6,29 @@
     <meta charset="utf-8">
     <title>Login</title>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
+    <link href="../static/css/login.css" th:href="@{/css/registration.css}" rel="stylesheet"/>
 </head>
 
-<body class="text-center">
+<body>
 
-<link href="../static/css/login.css" th:href="@{/css/registration.css}" rel="stylesheet"/>
+<div id="container">
 
-<form class="fields" th:action="@{/login}" th:object="${user}" method="post">
+    <form class="fields" th:action="@{/login}" th:object="${user}" method="post">
 
-    <h1 class="h3 mb-3 font-weight-normal">Log into your account</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Log into your account</h1>
 
-    <input type="text" class="from-control" id="username" name="username" th:value="*{username}"
-           placeholder=" Username">
+        <input type="text" class="from-control" id="username" name="username" th:value="*{username}"
+               placeholder=" Username">
 
-    <input type="password" class="from-control" name="password"
-           th:value="*{password}"
-           placeholder=" Password">
+        <input type="password" class="from-control" name="password"
+               th:value="*{password}"
+               placeholder=" Password">
 
-    <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn btn-primary">Login</button>
 
-</form>
+    </form>
+    <br>
+<!--    <img src="${pageContext.request.contextPath}/resources/images/background-registration.png" alt="Happy pets">-->
+</div>
 </body>
 </html>

@@ -4,36 +4,51 @@
 <head>
     <meta charset="UTF-8"/>
     <title>New Life Animal Adoption Service</title>
+    <link href="../static/css/user.css" rel="stylesheet"/>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
 </head>
 
 
 <body>
 
-<div th:replace="fragments/navbar.html :: navigation"> </div>
+<div th:replace="navbar.html :: navigation"></div>
 
-<div class="container">
+<main style="overflow: scroll; padding-top: 110px; padding-bottom: 60px;">
 
-    <table class="table">
-        <thead class="thead-light">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">User</th>
-            <th scope="col">email</th>
-            <th scope="col">Action</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="container">
 
-        <tr th:each="user : ${users}">
-            <td><span th:text="${user.username}"></span></td>
-            <td><span th:text="${user.email}"></span></td>
-        </tr>
-        </tbody>
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">User</th>
+                <th scope="col">email</th>
+                <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="user : ${users}">
+                <td><span th:text="${user.username}"></span></td>
+                <td><span th:text="${user.email}"></span></td>
+            </tr>
+            </tbody>
 
 
-    </table>
-</div>
+        </table>
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="page-footer font-small  fixed-bottom" style="background-color: #e3f2fd;">
+
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a class="developers"> Krukovska Yana and Synelnyk Mariia</a>
+    </div>
+
+</footer>
+<!-- Footer -->
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
