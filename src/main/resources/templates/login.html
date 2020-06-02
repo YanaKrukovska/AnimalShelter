@@ -9,13 +9,15 @@
     <link href="../static/css/login.css" th:href="@{/css/registration.css}" rel="stylesheet"/>
 </head>
 
-<body>
+<body class="text-center">
 
 <div id="container">
 
+    <div id="name_site"><h1>Happy Pet</h1></div>
+
     <form class="fields" th:action="@{/login}" th:object="${user}" method="post">
 
-        <h1 class="h3 mb-3 font-weight-normal">Log into your account</h1>
+        <h1 class="h3 mb-3 font-weight-normal" id="login-banner">Log into your account</h1>
 
         <input type="text" class="from-control" id="username" name="username" th:value="*{username}"
                placeholder=" Username">
@@ -28,7 +30,7 @@
 
     </form>
     <br>
-<!--    <img src="${pageContext.request.contextPath}/resources/images/background-registration.png" alt="Happy pets">-->
+<!--    <img src="${pageContext.request.contextPath}/resources/static.images/background-registration.png" alt="Happy pets">-->
 </div>
 </body>
 </html>

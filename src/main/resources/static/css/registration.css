@@ -2,6 +2,7 @@
 body {
     height: 100%;
     display: flex;
+    -ms-flex-align: center;
     align-items: center;
     background-color: #ffffe6;
     font-family: 'Oxygen', sans-serif
@@ -13,22 +14,17 @@ body {
 }
 
 #name_site{
-    margin-top:30px;
-    margin-bottom: 30px;
-    width: 400px;
-    height:100px;
+    margin-top:40px;
+    margin-bottom: 40px;
 }
 
 h1{
-    color: #003333
-    align="center"
+    color: #003333;
 }
 
 .fields {
-    width: 80%;
+    width: 100%;
     max-width: 330px;
-    padding: 15px;
-    margin: 10px;
 }
 
 .fields .form-control {
