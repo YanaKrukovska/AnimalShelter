@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title>New Life Animal Adoption Service</title>
+    <title>Happy Pet Animal Adoption Service</title>
     <link href="../static/css/index.css" rel="stylesheet"/>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
 
@@ -43,7 +43,8 @@
             </tbody>
         </table>
     </div>
-    <div>
+
+    <div sec:authorize="hasRole('ADMIN')">
         <table class="table">
             <thead class="thead-light">
             <tr>
@@ -64,6 +65,8 @@
             </tbody>
         </table>
     </div>
+
+
 </main>
 <!-- start main -->
 

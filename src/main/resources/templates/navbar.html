@@ -1,15 +1,16 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
-<nav th:fragment="navigation" class="navbar navbar-expand-lg navbar navbar-light static-top fixed-top" style="background-color: #e3f2fd;" xmlns:th="http://www.w3.org/1999/xhtml">
-
+<nav th:fragment="navigation" class="navbar navbar-expand-lg navbar navbar-light static-top fixed-top"
+     style="background-color: #e3f2fd;" xmlns:th="http://www.w3.org/1999/xhtml">
 
     <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="../images/icon-wolf.png" width="30" height="30" class="d-inline-block align-top" alt="logo">
-                <p align="right" style="   font-size: 150%;">Happy Pet</p>
-            </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
+        <a class="navbar-brand" href="/">
+            <img src="/images/icon-wolf.png" width="30" height="30" class="d-inline-block align-top"
+                 style="font-size: 150%;" alt="logo"> Happy Pet
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,14 +21,18 @@
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
+
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item">
+                    <a class="nav-link" href="#">Requests</a>
                 </li>
-                <li class="nav-item">
+
+
+                <li sec:authorize="hasRole('ADMIN')" class="nav-item">
                     <a href="#" class="nav-link" th:href="@{/users}">Users</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="/contacts">Contacts</a>
                 </li>
             </ul>
         </div>

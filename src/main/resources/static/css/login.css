@@ -1,6 +1,7 @@
 body {
     height: 100%;
     display: flex;
+    -ms-flex-align: center;
     align-items: center;
     background-color: #ffffe6;
     font-family: 'Oxygen', sans-serif
@@ -8,16 +9,19 @@ body {
 
 #container {
     height: 100%;
-    margin: auto;
+    margin: 0 auto;
 }
 
+
+#name_site{
+    margin-top:50px;
+    margin-bottom: 40px;
+}
 
 .fields {
     width: 100%;
     max-width: 330px;
-    padding: 15px;
-    margin: auto;
-}
+ }
 
 .fields .form-control {
     height: 40px;

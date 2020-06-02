@@ -53,4 +53,9 @@ public class ApplicationController {
         return "users";
     }
 
+    @GetMapping("/contacts")
+    public String openContact(Model model) {
+        return "contact";
+    }
+
 }
