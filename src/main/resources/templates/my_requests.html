@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Happy Pet Animal Adoption Service</title>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
+</head>
+<body>
+
+<!-- Navigation -->
+<div th:replace="fragments/navbar.html :: navigation"></div>
+
+
+<main style="padding-top: 110px; padding-bottom: 60px;">
+    <div class="container">
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">№</th>
+                <th scope="col">Animal name</th>
+                <th scope="col">User</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr th:each="request : ${requests}">
+                <td><span th:text="${request.id+1}"></span></td>
+                <td><span th:text="${request.animal.name}"></span></td>
+                <td><span th:text="${request.user.username}"></span></td>
+                <td><span th:text="${request.date}"></span></td>
+                <td th:style="${request.status} == 'accepted' ?  'background: green' : (${request.status} == 'rejected' ? 'background: red' :  'background: yellow')">
+                    <span th:text="${request.status}"></span>
+                </td>
+
+            </tbody>
+        </table>
+    </div>
+</main>
+
+<footer class="page-footer font-small  fixed-bottom" style="background-color: #e3f2fd;">
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a class="developers"> Krukovska Yana and Synelnyk Mariia</a>
+    </div>
+</footer>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

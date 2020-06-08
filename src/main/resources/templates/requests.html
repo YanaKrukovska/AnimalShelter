@@ -13,7 +13,7 @@
 
 
 <!-- start main -->
-<main style="overflow: scroll; padding-top: 110px; padding-bottom: 60px;">
+<main style="padding-top: 110px; padding-bottom: 60px;">
     <div class="container">
         <div sec:authorize="hasRole('ADMIN')">
             <table class="table">
@@ -23,6 +23,8 @@
                     <th scope="col">Animal name</th>
                     <th scope="col">User</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -32,7 +34,20 @@
                     <td><span th:text="${request.animal.name}"></span></td>
                     <td><span th:text="${request.user.username}"></span></td>
                     <td><span th:text="${request.date}"></span></td>
-                </tr>
+                    <td><span th:text="${request.status}"></span></td>
+                    <form th:action="@{/acceptRequest}" method="post">
+                        <td><input type="hidden" th:value="${request.id}" name="requestId"/>
+                            <button type="submit" class="addbutton" name="add" value="add">Accept</button>
+                        </td>
+                    </form>
+
+                    <form th:action="@{/rejectRequest}" method="post">
+                        <td><input type="hidden" th:value="${request.id}" name="requestId"/>
+                            <button type="submit" class="addbutton" name="add" value="add">Reject</button>
+                        </td>
+
+
+                    </form>
                 </tbody>
             </table>
         </div>

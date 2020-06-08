@@ -5,10 +5,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.Animal;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.Request;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.User;
@@ -40,16 +37,20 @@ public class ApplicationController {
         return "index";
     }
 
-    @GetMapping("/requests")
-    public String showRequestsList(Model model) {
-        model.addAttribute("requests", requestService.getAllRequests());
-        return "requests";
-    }
 
     @GetMapping("/users")
     public String openUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "users";
+    }
+
+
+    @GetMapping("/my-requests")
+    public String redirectToNotifications(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+        User user = userService.findUserByUsername(currentUser.getUsername());
+        model.addAttribute("currentStudent", user);
+        model.addAttribute("requests", requestService.findAllByUser(user));
+        return "my_requests";
     }
 
 
@@ -59,7 +60,7 @@ public class ApplicationController {
         model.addAttribute("currentStudent", user);
         model.addAttribute("animals", animalService.getAllAnimals());
         model.addAttribute("requests", requestService.getAllRequests());
-        requestService.addRequest(new Request(user, animalService.findAnimalById(animalId), new Date()));
+        requestService.addRequest(new Request(user, animalService.findAnimalById(animalId), new Date(), "pending"));
         return "redirect:/";
     }
 
@@ -85,6 +86,25 @@ public class ApplicationController {
         return "redirect:/";
     }
 
+    @GetMapping("/requests")
+    public String showRequestsList(Model model) {
+        model.addAttribute("requests", requestService.getAllRequests());
+        model.addAttribute("requestId", -1);
+        model.addAttribute("accepted", false);
+        return "requests";
+    }
+
+    @PostMapping("/acceptRequest")
+    public String acceptRequest(@ModelAttribute("requestId") long requestId) {
+        requestService.updateRequest(requestService.findById(requestId), "accepted");
+        return "redirect:/requests";
+    }
+
+    @PostMapping("/rejectRequest")
+    public String rejectRequest(@ModelAttribute("requestId") long requestId) {
+        requestService.updateRequest(requestService.findById(requestId), "rejected");
+        return "redirect:/requests";
+    }
 
     @GetMapping("/contacts")
     public String openContact(Model model) {
