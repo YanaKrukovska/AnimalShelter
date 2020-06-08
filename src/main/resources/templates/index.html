@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Happy Pet Animal Adoption Service</title>
-    <link href="../static/css/index.css" rel="stylesheet"/>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
 
 </head>
 <body>
 
 <!-- Navigation -->
-<div th:replace="navbar.html :: navigation"></div>
+<div th:replace="fragments/navbar.html :: navigation"></div>
 
 
 <!-- start main -->
@@ -42,31 +41,15 @@
             </tr>
             </tbody>
         </table>
+
+        <div sec:authorize="hasRole('ADMIN')">
+            <form th:action="@{/addAnimal}" method="get">
+                <button type="submit" class="btn btn-primary">Add animal</button>
+            </form>
+        </div>
+
+
     </div>
-
-    <div sec:authorize="hasRole('ADMIN')">
-        <table class="table">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col">№</th>
-                <th scope="col">Animal name</th>
-                <th scope="col">User</th>
-                <th scope="col">Date</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            <tr th:each="request : ${requests}">
-                <td><span th:text="${request.id+1}"></span></td>
-                <td><span th:text="${request.animal.name}"></span></td>
-                <td><span th:text="${request.user.username}"></span></td>
-                <td><span th:text="${request.date}"></span></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-
 </main>
 <!-- start main -->
 

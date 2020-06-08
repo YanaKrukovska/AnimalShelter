@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
+
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
 
 <nav th:fragment="navigation" class="navbar navbar-expand-lg navbar navbar-light static-top fixed-top"
      style="background-color: #e3f2fd;" xmlns:th="http://www.w3.org/1999/xhtml">
@@ -22,13 +24,16 @@
                     </a>
                 </li>
 
-                <li sec:authorize="hasRole('ADMIN')" class="nav-item">
-                    <a class="nav-link" href="#">Requests</a>
+                <li sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link" href="/addAnimal">Add New Animal</a>
                 </li>
 
+                <li sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link" href="/requests">Requests</a>
+                </li>
 
-                <li sec:authorize="hasRole('ADMIN')" class="nav-item">
-                    <a href="#" class="nav-link" th:href="@{/users}">Users</a>
+                <li sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link" href="/users">Users</a>
                 </li>
 
                 <li class="nav-item">
