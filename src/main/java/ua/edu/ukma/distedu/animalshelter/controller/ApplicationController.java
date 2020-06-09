@@ -87,6 +87,10 @@ public class ApplicationController {
     public String submitAnimal(@ModelAttribute Animal animal, @ModelAttribute("date") String test_date, @ModelAttribute("animalPhoto") MultipartFile animalPhoto) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+        if (test_date.equals("") || animal.getName().equals("") || animal.getAge() == 0) {
+            return "redirect:/add-animal";
+        }
+
         Date convertedDate = new Date();
         try {
             convertedDate = sdf.parse(test_date);
@@ -96,13 +100,12 @@ public class ApplicationController {
 
         String encryptedPhoto = "";
 
-        if (animalPhoto != null) {
-            try {
-                encryptedPhoto = Base64.encodeBase64String(animalPhoto.getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        try {
+            encryptedPhoto = Base64.encodeBase64String(animalPhoto.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
         animalService.addAnimal(new Animal(animal.getName(), animal.getBreed(), animal.getGender(), animal.getAge(), convertedDate, null, encryptedPhoto));
         return "redirect:/";
     }
@@ -132,7 +135,9 @@ public class ApplicationController {
 
     @GetMapping("/contacts")
     public String openContact(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-        model.addAttribute("notifications", requestService.findAllByUser(userService.findUserByUsername(currentUser.getUsername())).size());
+        if (currentUser != null) {
+            model.addAttribute("notifications", requestService.findAllByUser(userService.findUserByUsername(currentUser.getUsername())).size());
+        }
         return "contact";
     }
 

@@ -22,11 +22,15 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public String isValidPassword(String password) {
-        return null;
+
+        if (password.length() < 2){
+            return "Password is too short";
+        }
+        return "Password is valid";
     }
 
     @Override
     public boolean comparePasswordAndConfirmationPassword(String password, String confirmationPassword) {
-        return false;
+        return password.equals(confirmationPassword);
     }
 }
