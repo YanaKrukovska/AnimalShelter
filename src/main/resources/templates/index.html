@@ -48,7 +48,7 @@
         </table>
 
         <div sec:authorize="hasRole('ADMIN')">
-            <form th:action="@{/addAnimal}" method="get">
+            <form th:action="@{/add-animal}" method="get">
                 <button type="submit" class="btn btn-primary">Add animal</button>
             </form>
         </div>

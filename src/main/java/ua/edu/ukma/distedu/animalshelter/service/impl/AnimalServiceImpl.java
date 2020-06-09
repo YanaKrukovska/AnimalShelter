@@ -36,22 +36,6 @@ public class AnimalServiceImpl implements AnimalService {
 
     @Override
     public Animal addAnimal(Animal newAnimal) {
-/*
-        File file = new File("D://Downloads//image.jpg");
-        byte[] picInBytes = new byte[(int) file.length()];
-        FileInputStream fileInputStream = null;
-        try {
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(picInBytes);
-            fileInputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        newAnimal.setPhoto();
-*/
-
-
         return animalRepository.save(newAnimal);
     }
 

@@ -12,7 +12,7 @@
 
 <body class="text-center">
 
-<form class="fields" th:action="@{/addAnimal}" method="post">
+<form class="fields" th:action="@{/add-animal}" enctype="multipart/form-data" method="post">
     <h1 class="h3 mb-3 font-weight-normal">Insert new animal parameters</h1>
 
     <input type="text" class="from-control" id="name" name="name" th:value="*{animal.name}"
@@ -29,6 +29,9 @@
 
     <input type="date" class="form-control" data-date-format="yyyy-mm-dd" id="date" name="date"  th:value="*{date}"
     placeholder="Arrival Date">
+
+    <input type="file" class="form-control-file" id="animalPhoto" name="animalPhoto" multiple="multiple" th:value="*{animalPhoto}"/>
+
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
 
