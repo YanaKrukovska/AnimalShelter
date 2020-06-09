@@ -10,9 +10,9 @@ INSERT INTO animals (id , name, breed, gender, age, arrival_date) VALUES
   (4, 'Karel', 'cat', 'male', 2, '2018-09-01');
 
 
-INSERT INTO requests (id, animal_id, user_id, date) VALUES
-  (0, 1, 1, '2020-05-20 14:18:50'),
-  (1, 3, 2, '2020-05-05 11:59:00');
+INSERT INTO requests (id, animal_id, user_id, date, status) VALUES
+  (0, 1, 1, '2020-05-20 14:18:50', 'pending'),
+  (1, 3, 2, '2020-05-05 11:59:00', 'pending');
 
 INSERT INTO user_roles(id, name) VALUES
 (1, 'ROLE_USER'), (2, 'ROLE_ADMIN');

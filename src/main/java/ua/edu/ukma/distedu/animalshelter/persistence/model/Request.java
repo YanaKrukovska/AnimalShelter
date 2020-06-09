@@ -22,13 +22,17 @@ public class Request {
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
+    @Column(nullable = false)
+    private String status;
+
     public Request() {
     }
 
-    public Request(User user, Animal animal, Date date) {
+    public Request(User user, Animal animal, Date date, String status) {
         this.user = user;
         this.animal = animal;
         this.date = date;
+        this.status = status;
     }
 
 
@@ -62,5 +66,13 @@ public class Request {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

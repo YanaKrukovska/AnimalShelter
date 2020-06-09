@@ -7,6 +7,7 @@ import ua.edu.ukma.distedu.animalshelter.persistence.repository.AnimalRepository
 import ua.edu.ukma.distedu.animalshelter.persistence.repository.UserRepository;
 import ua.edu.ukma.distedu.animalshelter.service.AnimalService;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -25,6 +26,11 @@ public class AnimalServiceImpl implements AnimalService {
     }
 
     @Override
+    public List<Animal> findAllByAdoptionDateNull() {
+        return animalRepository.findAllByAdoptionDateNull();
+    }
+
+    @Override
     public Animal addAnimal(Animal newAnimal) {
         return animalRepository.save(newAnimal);
     }
@@ -32,6 +38,13 @@ public class AnimalServiceImpl implements AnimalService {
     @Override
    public Animal findAnimalById(long id){
         return animalRepository.findAnimalById(id);
+    }
+
+    @Override
+    public void updateAnimal(Animal animal, Date adoptionDate) {
+        Animal animalDB = animalRepository.findAnimalById(animal.getId());
+        animalDB.setAdoptionDate(adoptionDate);
+        animalRepository.save(animalDB);
     }
 
 }

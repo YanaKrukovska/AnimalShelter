@@ -1,59 +1,46 @@
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8"/>
-    <title>New Life Animal Adoption Service</title>
-    <link href="../static/css/user.css" rel="stylesheet"/>
+    <title>Happy Pet Animal Adoption Service</title>
     <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.5.0/css/bootstrap.min.css} "/>
 </head>
-
-
 <body>
 
+<!-- Navigation -->
 <div th:replace="fragments/navbar.html :: navigation(notifications=${notifications})"></div>
 
-<main style="overflow: scroll; padding-top: 110px; padding-bottom: 60px;">
 
+<main style="padding-top: 110px; padding-bottom: 60px;">
     <div class="container">
-
         <table class="table">
             <thead class="thead-light">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">User</th>
-                <th scope="col">email</th>
-                <th scope="col">Action</th>
+                <th scope="col">Animal name</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
             </tr>
             </thead>
             <tbody>
 
-            <tr th:each="user : ${users}">
-                <td><span th:text="${user.username}"></span></td>
-                <td><span th:text="${user.email}"></span></td>
-            </tr>
+            <tr th:each="request : ${requests}">
+                <td><span th:text="${request.animal.name}"></span></td>
+                <td><span th:text="${request.date}"></span></td>
+                <td><span th:text="${request.status}"></span></td>
             </tbody>
-
-
         </table>
     </div>
-
 </main>
 
-<!-- Footer -->
 <footer class="page-footer font-small  fixed-bottom" style="background-color: #e3f2fd;">
-
     <div class="footer-copyright text-center py-3">© 2020 Copyright:
         <a class="developers"> Krukovska Yana and Synelnyk Mariia</a>
     </div>
-
 </footer>
-<!-- Footer -->
 
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
 
 </body>
 </html>
