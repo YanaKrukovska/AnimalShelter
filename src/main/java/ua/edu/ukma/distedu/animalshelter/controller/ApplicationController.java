@@ -35,7 +35,7 @@ public class ApplicationController {
 
     @GetMapping("/")
     public String main(Model model, @AuthenticationPrincipal UserDetails currentUser) {
-        model.addAttribute("animals", animalService.getAllAnimals());
+        model.addAttribute("animals", animalService.findAllByAdoptionDateNull());
         model.addAttribute("requests", requestService.getAllRequests());
         if (currentUser != null) {
             model.addAttribute("notifications", requestService.findAllByUser(userService.findUserByUsername(currentUser.getUsername())).size());
@@ -103,7 +103,9 @@ public class ApplicationController {
 
     @PostMapping("/acceptRequest")
     public String acceptRequest(@ModelAttribute("requestId") long requestId) {
-        requestService.updateRequest(requestService.findById(requestId), "accepted");
+        Request request = requestService.findById(requestId);
+        requestService.updateRequest(request, "accepted");
+        animalService.updateAnimal(animalService.findAnimalById(request.getAnimal().getId()), new Date());
         return "redirect:/requests";
     }
 
