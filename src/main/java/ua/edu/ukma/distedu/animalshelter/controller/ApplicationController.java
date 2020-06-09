@@ -1,14 +1,12 @@
 package ua.edu.ukma.distedu.animalshelter.controller;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.Animal;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.Request;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.User;
@@ -16,9 +14,16 @@ import ua.edu.ukma.distedu.animalshelter.service.AnimalService;
 import ua.edu.ukma.distedu.animalshelter.service.RequestService;
 import ua.edu.ukma.distedu.animalshelter.service.UserService;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ApplicationController {
@@ -37,11 +42,13 @@ public class ApplicationController {
     public String main(Model model, @AuthenticationPrincipal UserDetails currentUser) {
         model.addAttribute("animals", animalService.findAllByAdoptionDateNull());
         model.addAttribute("requests", requestService.getAllRequests());
+
         if (currentUser != null) {
             model.addAttribute("notifications", requestService.findAllByUser(userService.findUserByUsername(currentUser.getUsername())).size());
         }
         return "index";
     }
+
 
 
     @GetMapping("/users")

@@ -30,6 +30,18 @@ public class Animal {
     @Temporal(TemporalType.DATE)
     private Date adoptionDate;
 
+    @Lob
+    @Column(name="photo", nullable = true)
+    private String photo;
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
     public Animal() {
     }
 

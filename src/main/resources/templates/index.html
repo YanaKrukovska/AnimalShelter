@@ -18,6 +18,7 @@
         <table class="table">
             <thead class="thead-light">
             <tr>
+                <th scope="col">Photo</th>
                 <th scope="col">Name</th>
                 <th scope="col">Breed</th>
                 <th scope="col">Age</th>
@@ -29,6 +30,7 @@
 
             <tr th:each="animal : ${animals}">
                 <form th:action="@{/sendRequest}" th:object="${request}" method="post">
+                    <td><img  th:src="@{'data:image/jpeg;base64,'+${animal.photo}}" th:width="400" height="250" /></td>
                     <td><span th:text="${animal.name}"></span></td>
                     <td><span th:text="${animal.breed}"></span></td>
                     <td><span th:text="${animal.age}"></span></td>
