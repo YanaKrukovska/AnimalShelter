@@ -13,7 +13,7 @@
 
 <div th:replace="fragments/navbar.html :: navigation(notifications=${notifications})"></div>
 
-<main style="overflow: scroll; padding-top: 110px; padding-bottom: 60px;">
+<main style="padding-top: 110px; padding-bottom: 60px;">
 
     <div class="container">
 
@@ -23,12 +23,12 @@
                 <th scope="col">#</th>
                 <th scope="col">User</th>
                 <th scope="col">email</th>
-                <th scope="col">Action</th>
             </tr>
             </thead>
             <tbody>
 
             <tr th:each="user : ${users}">
+                <td><span th:text="${user.id}"></span></td>
                 <td><span th:text="${user.username}"></span></td>
                 <td><span th:text="${user.email}"></span></td>
             </tr>

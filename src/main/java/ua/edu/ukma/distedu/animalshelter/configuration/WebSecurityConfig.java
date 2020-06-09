@@ -27,16 +27,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests()
                 .antMatchers("/registration").not().fullyAuthenticated()
-                .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/").permitAll()
                 .antMatchers("/login/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
-                .antMatchers("/console/**").permitAll()
-                .antMatchers("/register").permitAll()
+                .antMatchers("/contacts").permitAll()
                 .antMatchers("/confirm").permitAll()
-                .antMatchers("/css/**",
+                .antMatchers("/css/**","/static/**",
                         "/js/**",
-                        "/img/**",
+                        "/images/**",
                         "/webjars/**",
                         "/signup").permitAll()
                 .anyRequest().authenticated()
