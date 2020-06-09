@@ -8,7 +8,7 @@
 <body>
 
 <!-- Navigation -->
-<div th:replace="fragments/navbar.html :: navigation"></div>
+<div th:replace="fragments/navbar.html :: navigation(notifications=${notifications})"></div>
 
 
 <main style="padding-top: 110px; padding-bottom: 60px;">
@@ -16,9 +16,7 @@
         <table class="table">
             <thead class="thead-light">
             <tr>
-                <th scope="col">№</th>
                 <th scope="col">Animal name</th>
-                <th scope="col">User</th>
                 <th scope="col">Date</th>
                 <th scope="col">Status</th>
             </tr>
@@ -26,14 +24,9 @@
             <tbody>
 
             <tr th:each="request : ${requests}">
-                <td><span th:text="${request.id+1}"></span></td>
                 <td><span th:text="${request.animal.name}"></span></td>
-                <td><span th:text="${request.user.username}"></span></td>
                 <td><span th:text="${request.date}"></span></td>
-                <td th:style="${request.status} == 'accepted' ?  'background: green' : (${request.status} == 'rejected' ? 'background: red' :  'background: yellow')">
-                    <span th:text="${request.status}"></span>
-                </td>
-
+                <td><span th:text="${request.status}"></span></td>
             </tbody>
         </table>
     </div>

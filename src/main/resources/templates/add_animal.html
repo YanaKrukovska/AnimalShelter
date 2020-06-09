@@ -8,7 +8,7 @@
     <link href="../static/css/input.css" th:href="@{/css/input.css}" rel="stylesheet"/>
 </head>
 
-<div th:replace="fragments/navbar.html :: navigation"></div>
+<div th:replace="fragments/navbar.html :: navigation(notifications=${notifications})"></div>
 
 <body class="text-center">
 

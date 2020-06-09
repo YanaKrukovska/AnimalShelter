@@ -5,7 +5,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.Animal;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.Request;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.User;
@@ -31,9 +34,12 @@ public class ApplicationController {
     }
 
     @GetMapping("/")
-    public String main(Model model) {
+    public String main(Model model, @AuthenticationPrincipal UserDetails currentUser) {
         model.addAttribute("animals", animalService.getAllAnimals());
         model.addAttribute("requests", requestService.getAllRequests());
+        if (currentUser != null) {
+            model.addAttribute("notifications", requestService.findAllByUser(userService.findUserByUsername(currentUser.getUsername())).size());
+        }
         return "index";
     }
 
@@ -50,6 +56,7 @@ public class ApplicationController {
         User user = userService.findUserByUsername(currentUser.getUsername());
         model.addAttribute("currentStudent", user);
         model.addAttribute("requests", requestService.findAllByUser(user));
+        model.addAttribute("notifications", requestService.findAllByUser(userService.findUserByUsername(currentUser.getUsername())).size());
         return "my_requests";
     }
 
@@ -107,7 +114,8 @@ public class ApplicationController {
     }
 
     @GetMapping("/contacts")
-    public String openContact(Model model) {
+    public String openContact(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+        model.addAttribute("notifications", requestService.findAllByUser(userService.findUserByUsername(currentUser.getUsername())).size());
         return "contact";
     }
 
