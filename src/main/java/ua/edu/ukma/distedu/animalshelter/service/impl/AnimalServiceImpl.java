@@ -7,6 +7,10 @@ import ua.edu.ukma.distedu.animalshelter.persistence.repository.AnimalRepository
 import ua.edu.ukma.distedu.animalshelter.persistence.repository.UserRepository;
 import ua.edu.ukma.distedu.animalshelter.service.AnimalService;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 

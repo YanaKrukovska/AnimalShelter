@@ -30,6 +30,10 @@ public class Animal {
     @Temporal(TemporalType.DATE)
     private Date adoptionDate;
 
+    @Lob
+    @Column(name="photo", nullable = true)
+    private String photo;
+
     public Animal() {
     }
 
@@ -41,6 +45,17 @@ public class Animal {
         this.arrivalDate = arrivalDate;
         this.adoptionDate = adoptionDate;
     }
+
+    public Animal(String name, String breed, String gender, int age, Date arrivalDate, Date adoptionDate, String photo) {
+        this.name = name;
+        this.breed = breed;
+        this.gender = gender;
+        this.age = age;
+        this.arrivalDate = arrivalDate;
+        this.adoptionDate = adoptionDate;
+        this.photo = photo;
+    }
+
 
     public long getId() {
         return id;
@@ -97,4 +112,13 @@ public class Animal {
     public void setAdoptionDate(Date adoptionDate) {
         this.adoptionDate = adoptionDate;
     }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
 }
