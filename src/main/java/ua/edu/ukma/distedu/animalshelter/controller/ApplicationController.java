@@ -104,6 +104,7 @@ public class ApplicationController {
     @PostMapping("/acceptRequest")
     public String acceptRequest(@ModelAttribute("requestId") long requestId) {
         Request request = requestService.findById(requestId);
+        requestService.updateRequests(requestService.findAllByAnimal(request.getAnimal()), "rejected");
         requestService.updateRequest(request, "accepted");
         animalService.updateAnimal(animalService.findAnimalById(request.getAnimal().getId()), new Date());
         return "redirect:/requests";
