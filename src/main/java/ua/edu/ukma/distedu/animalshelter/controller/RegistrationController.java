@@ -29,14 +29,31 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute User user) {
+    public String addUser(@ModelAttribute User user, Model model) {
+
+        if (user.getUsername().equals("")) {
+            model.addAttribute("usernameError", "usernameError");
+            return "registration";
+        }
+
+        if (user.getEmail().equals("")) {
+            model.addAttribute("mailError", "mailError");
+            return "registration";
+        }
+
+        if (user.getPassword().equals("")) {
+            model.addAttribute("passwordError", "passwordError");
+            return "registration";
+        }
 
         if (!passwordService.comparePasswordAndConfirmationPassword(user.getPassword(), user.getPasswordConfirm())) {
-            return "redirect:/registration";
+            model.addAttribute("passwordConfirmError", "passwordConfirmError");
+            return "registration";
         }
 
         if (!userService.saveUser(user)) {
-            return "redirect:/registration";
+            model.addAttribute("logError", "logError");
+            return "registration";
         }
 
         return "redirect:/login";
@@ -48,17 +65,31 @@ public class RegistrationController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String loginUser(@ModelAttribute User user) {
+    @PostMapping("/login-processing")
+    public String loginUser(@ModelAttribute User user, Model model) {
+
+        if (user.getUsername().equals("")) {
+            model.addAttribute("usernameError", "usernameError");
+            return "login";
+        }
 
         if (userService.findUserByUsername(user.getUsername()) == null) {
-            return "redirect:/login";
+            model.addAttribute("userNotFoundError", "userNotFoundError");
+            return "login";
         }
-        if (!userService.findUserByUsername(user.getUsername()).getPassword().equals(user.getPassword())) {
-            return "redirect:/login";
+
+        if (user.getUsername().equals("")) {
+            model.addAttribute("passwordEmptyError", "passwordEmptyError");
+            return "login";
         }
+
+        if (!passwordService.compareRawAndEncodedPassword(user.getPassword(), (userService.findUserByUsername(user.getUsername()).getPassword()))) {
+            model.addAttribute("wrongPasswordError", "wrongPasswordError");
+            return "login";
+        }
+
+
         return "redirect:/";
     }
-
 
 }
