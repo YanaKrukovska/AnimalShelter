@@ -32,6 +32,7 @@
 
     <input type="file" class="form-control-file" id="animalPhoto" name="animalPhoto" multiple="multiple" th:value="*{animalPhoto}"/>
 
+    <span th:if="${animalError != null}" class="error" >Fields can't be empty</span>
 
     <button class="btn btn-lg btn-primary btn-block" type="submit">Add</button>
 
