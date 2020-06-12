@@ -25,17 +25,29 @@
             <input type="text" class="from-control" id="username" name="username" th:value="*{username}"
                    placeholder="username">
 
+            <span th:if="${usernameError != null}" class="error">Username can't be empty</span>
+            <span th:if="${logError != null}" class="error">User with such name already exists</span>
+
             <input type="email" class="from-control" id="email" name="email" th:value="*{email}" placeholder="email">
 
-            <input type="password" class="from-control" id="password" name="password"
+            <span th:if="${mailError != null}" class="error">Mail can't be empty</span>
+
+            <input type="password" class="from-control" id="password" name="password" style="margin-bottom: -1px"
                    th:value="*{password}"
                    placeholder="password">
 
-            <input type="password" class="from-control" id="passwordConfirm" name="passwordConfirm"
+            <span th:if="${passwordError != null}" class="error" >Wrong password</span>
+
+            <input type="password" class="from-control" id="passwordConfirm" name="passwordConfirm" style="margin-bottom: 15px"
                    th:value="*{passwordConfirm}"
-                   placeholder="comfirm password">
+                   placeholder="confirm password">
+
+            <span th:if="${passwordConfirmError != null}" class="error">Passwords are different</span>
 
             <button type="submit" class="btn btn-primary">Save</button>
+
+            <a th:href="@{/login}">Already have an account? Sign in </a>
+
         </div>
         <br>
     </form>

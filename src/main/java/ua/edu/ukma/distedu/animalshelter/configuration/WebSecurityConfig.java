@@ -29,6 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration").not().fullyAuthenticated()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login/**").permitAll()
+                .antMatchers("/login-processing").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/contacts").permitAll()
                 .antMatchers("/confirm").permitAll()
@@ -41,11 +42,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll()
-                .logoutSuccessUrl("/");
+                .failureForwardUrl("/login-processing")
+                .loginProcessingUrl("/login-processing")
+                .defaultSuccessUrl("/", true)
+                .permitAll();
 
         httpSecurity.csrf().disable();
         httpSecurity.headers().frameOptions().disable();

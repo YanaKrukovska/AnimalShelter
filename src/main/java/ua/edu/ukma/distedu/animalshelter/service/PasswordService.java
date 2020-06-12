@@ -7,5 +7,5 @@ public interface PasswordService {
     //TODO: returns message with error that occurred while creating password
     String isValidPassword(String password);
     boolean comparePasswordAndConfirmationPassword(String password, String confirmationPassword);
-
+    boolean compareRawAndEncodedPassword(String raw, String encoded);
 }
