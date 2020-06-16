@@ -29,6 +29,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration").not().fullyAuthenticated()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login/**").permitAll()
+                .antMatchers("/users", "/requests", "/add-animal").hasRole("ADMIN")
+                .antMatchers("/my-requests").hasRole("USER")
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/contacts").permitAll()
                 .antMatchers("/confirm").permitAll()
