@@ -13,12 +13,8 @@ import ua.edu.ukma.distedu.animalshelter.service.impl.UserServiceImpl;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserServiceImpl userService;
-
     @Autowired
-    public WebSecurityConfig(UserServiceImpl userService) {
-        this.userService = userService;
-    }
+    UserServiceImpl userService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -33,11 +29,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration").not().fullyAuthenticated()
                 .antMatchers("/").permitAll()
                 .antMatchers("/login/**").permitAll()
-                .antMatchers("/login-processing").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/contacts").permitAll()
                 .antMatchers("/confirm").permitAll()
-                .antMatchers("/css/**", "/static/**",
+                .antMatchers("/css/**","/static/**",
                         "/js/**",
                         "/images/**",
                         "/webjars/**",

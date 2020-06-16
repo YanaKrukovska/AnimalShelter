@@ -4,17 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.Role;
 import ua.edu.ukma.distedu.animalshelter.persistence.model.User;
-import ua.edu.ukma.distedu.animalshelter.persistence.repository.RoleRepository;
 import ua.edu.ukma.distedu.animalshelter.persistence.repository.UserRepository;
 import ua.edu.ukma.distedu.animalshelter.service.PasswordService;
 import ua.edu.ukma.distedu.animalshelter.service.UserService;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -22,13 +18,11 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final PasswordService passwordService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordService passwordService) {
+    public UserServiceImpl(UserRepository userRepository, PasswordService passwordService) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
         this.passwordService = passwordService;
     }
 
@@ -72,7 +66,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-
     public User findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
@@ -86,14 +79,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
 
         return user;
-    }
-
-    public boolean deleteUser(Long userId) {
-        if (userRepository.findById(userId).isPresent()) {
-            userRepository.deleteById(userId);
-            return true;
-        }
-        return false;
     }
 
 }
